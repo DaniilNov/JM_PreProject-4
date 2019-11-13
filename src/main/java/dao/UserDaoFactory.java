@@ -10,7 +10,6 @@ public class UserDaoFactory {
 
 
     public UserDaoFactory()  {
-
         DBHelper dbHelper = DBHelper.getInstance();
         Properties prop = new Properties();
         try {
@@ -25,6 +24,7 @@ public class UserDaoFactory {
         else if (usedTech.equals("hibernate")){
             this.userDao = new UserDaoHibernateImpl();
         }
+
     }
 
     public UserDao getUserDao() {
