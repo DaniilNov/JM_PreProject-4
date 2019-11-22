@@ -950,7 +950,12 @@
       <DataType>varchar(40)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="240" parent="236" name="PRIMARY">
+    <column id="240" parent="236" name="role">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="241" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

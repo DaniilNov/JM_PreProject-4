@@ -10,8 +10,10 @@ public class UserDaoFactory {
 
 
     public UserDaoFactory()  {
+
         DBHelper dbHelper = DBHelper.getInstance();
         Properties prop = new Properties();
+
         try {
             prop.load(dbHelper.getClass().getClassLoader().getResourceAsStream("used.properties"));
         } catch (IOException e) {

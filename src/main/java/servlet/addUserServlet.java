@@ -29,12 +29,13 @@ public class addUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
+        String role = req.getParameter("role");
         if(name.isEmpty()||password.isEmpty()){
             RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/AddUserJSP.jsp");
             dispatcher.forward(req,resp);
             return;
         }
-        User user = new User(name,password);
+        User user = new User(name,password,role);
         userService.addUser(user);
         HttpSession session = req.getSession();
         session.setAttribute("user",user);

@@ -33,7 +33,8 @@ public class editServlet extends HttpServlet {
         Long id = Long.parseLong(req.getParameter("id"));
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        userService.editUser(new User(id,name,password));
+        String role = req.getParameter("role");
+        userService.editUser(new User(id,name,password,role));
         resp.sendRedirect("/allUsers");
     }
 }

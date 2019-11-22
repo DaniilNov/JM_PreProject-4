@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>ALL USERS</title>
+
 </head>
 <body>
 <div align="center">
@@ -13,6 +14,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Password</th>
+            <th>Role</th>
 
         </tr>
         <c:forEach items="${usersFromServlet}" var="user">
@@ -20,6 +22,7 @@
                 <td>${user.id}</td>
                 <td>${user.name}</td>
                 <td>${user.password}</td>
+                <td>${user.role}</td>
 
                 <td>
                     <a href="/editUser?id=${user.id}">Edit</a>

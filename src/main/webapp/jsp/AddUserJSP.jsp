@@ -12,6 +12,9 @@
         <li>
             <label>Password: <input type="text" name="password"></label>
         </li>
+        <li>
+            <label>Role: <input type="text" name="role"></label>
+        </li>
         <li><input type="submit" align="center" value="Submit"/></li>
     </ul>
 

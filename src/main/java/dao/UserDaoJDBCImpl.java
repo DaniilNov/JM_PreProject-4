@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDao {
     //language=SQL
     private final String SQL_GET_ALL_USERS = "SELECT * FROM users";
     //language=SQL
-    private final String SQL_ADD_USER = "INSERT INTO users(name, password) VALUES (?,?)";
+    private final String SQL_ADD_USER = "INSERT INTO users(name, password,role) VALUES (?,?,?)";
     //language=SQL
     private final String SQL_GET_USER_BY_NAME = "SELECT * FROM users WHERE name = ?";
     //language=SQL
@@ -23,7 +23,7 @@ public class UserDaoJDBCImpl implements UserDao {
     //language=SQL
     private final String SQL_DELETE_USER = "DELETE FROM users WHERE id = ?";
     //language=SQL
-    private final String SQL_EDIT_USER = "UPDATE users SET name=?, password=? WHERE id=?";
+    private final String SQL_EDIT_USER = "UPDATE users SET name=?, password=?,role=? WHERE id=?";
 
 
     public List<User> getAllUsers() {
@@ -37,7 +37,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 int id = resultSet.getInt(1);
                 String name = resultSet.getString(2);
                 String password = resultSet.getString(3);
-                User user = new User(id, name, password);
+                String role = resultSet.getString(4);
+                User user = new User(id, name, password,role);
                 users.add(user);
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -54,6 +55,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 PreparedStatement statement = dbHelper.getConnection().prepareStatement(SQL_ADD_USER);
                 statement.setString(1, user.getName());
                 statement.setString(2, user.getPassword());
+                statement.setString(3, user.getPassword());
                 statement.executeUpdate();
                 statement.close();
             }
@@ -78,9 +80,11 @@ public class UserDaoJDBCImpl implements UserDao {
     public void editUser(User user) {
         try {
             PreparedStatement statement = dbHelper.getConnection().prepareStatement(SQL_EDIT_USER);
+
             statement.setString(1, user.getName());
             statement.setString(2, user.getPassword());
-            statement.setLong(3, user.getId());
+            statement.setString(3, user.getRole());
+            statement.setLong(4, user.getId());
             statement.executeUpdate();
             statement.close();
         } catch (SQLException | ClassNotFoundException e) {
@@ -98,7 +102,8 @@ public class UserDaoJDBCImpl implements UserDao {
             long id2 = result.getLong(1);
             String name = result.getString(2);
             String password = result.getString(3);
-            User user = new User(id2, name, password);
+            String role = result.getString(4);
+            User user = new User(id2, name, password,role);
             return user;
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -117,7 +122,8 @@ public class UserDaoJDBCImpl implements UserDao {
             long id = result.getLong(1);
             String names = result.getString(2);
             String password = result.getString(3);
-            User user = new User(id, names, password);
+            String role = result.getString(4);
+            User user = new User(id, names, password,role);
             return user;
 
         } catch (SQLException | ClassNotFoundException e) {

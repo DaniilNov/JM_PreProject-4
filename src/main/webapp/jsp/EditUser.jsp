@@ -14,6 +14,9 @@
             <li>
                 <label>Password: <input type="text" name="password" value="${user.password}"></label>
             </li>
+            <li>
+                <label>Role: <input type="text" name="role" value="${user.role}"></label>
+            </li>
 
             <li><input type="submit" align="center" value="Submit"/></li>
         </ul>
