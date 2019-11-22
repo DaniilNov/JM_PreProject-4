@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/login")
+
 public class loginServlet extends HttpServlet {
 
     UserService userService = UserServiceImpl.getInstance();
