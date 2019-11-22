@@ -33,5 +33,6 @@
         </c:forEach>
     </table>
 </div>
+<a href="/logout">Выйти</a>
 </body>
 </html>
