@@ -21,7 +21,8 @@ public class AuthFilter implements Filter {
         User user =(User) session.getAttribute("user");
 
         if (user!=null&&user.getRole().equals("admin")){
-            request.getRequestDispatcher("/allUsers").forward(request,response);
+            ((HttpServletResponse)response).sendRedirect("/allUsers");
+//            request.getRequestDispatcher("/allUsers").forward(request,response);
 
         }else if (user!=null&&user.getRole().equals("user")){
 
