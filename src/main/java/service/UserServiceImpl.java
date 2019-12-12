@@ -1,15 +1,15 @@
 package service;
 
 import dao.UserDao;
-import dao.UserDaoFactory;
+import dao.UserDaoFactoryImpl;
 import user.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl ourInstance = new UserServiceImpl();
-    private UserDao userDao = new UserDaoFactory().getUserDao();
+//    private UserDao userDao = new UserDaoFactoryOld().getUserDao();
+    private UserDao userDao = UserDaoFactoryImpl.getInstance().getUserDao();
     public static UserServiceImpl getInstance() {
         return ourInstance;
     }
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
+    public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByName(String name) throws SQLException {
+    public User getUserByName(String name){
         return userDao.getUserByName(name);
     }
 }

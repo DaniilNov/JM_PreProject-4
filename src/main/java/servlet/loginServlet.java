@@ -18,12 +18,12 @@ import java.sql.SQLException;
 
 public class loginServlet extends HttpServlet {
 
-    UserService userService = UserServiceImpl.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-     RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/Index.jsp");
-     dispatcher.forward(req,resp);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/Index.jsp");
+        dispatcher.forward(req, resp);
     }
 
     @Override
@@ -32,32 +32,30 @@ public class loginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         if (name.isEmpty() || password.isEmpty()) {
-            RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/Index.jsp");
-            dispatcher.forward(req, resp);
+            resp.sendRedirect("login");
             return;
         }
         try {
             User user = userService.getUserByName(name);
             if (user == null) {
-         resp.sendRedirect("login");
+                resp.sendRedirect("login");
                 return;
             }
             if (user.getPassword().equals(password)) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
 
-//                if ("admin".equals(user.getRole())) {
-//                    resp.sendRedirect("/admin");
-//                    return;
-//                } else if ("user".equals(user.getRole())) {
-//                    resp.sendRedirect("/admin");
-//                    return;
-//                }
-                resp.sendRedirect("/admin");
+                if ("admin".equals(user.getRole())) {
+                    resp.sendRedirect("/admin");
+                    return;
+                } else if ("user".equals(user.getRole())) {
+                    resp.sendRedirect("/user");
+                    return;
+                }
+
+
             }
-            else {
-                resp.sendRedirect("/login");
-            }
+            resp.sendRedirect("/login");
         } catch (SQLException e) {
             e.printStackTrace();
         }

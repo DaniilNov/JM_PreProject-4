@@ -15,10 +15,10 @@
             </div>
             <div class="field">
                 <label for="uPass">Password:</label>
-                <input type="text" id="uPass" name="password" />
+                <input type="password" id="uPass" name="password" />
             </div>
             <div class="submit">
-                <input type="submit" align="center" value="name"/>
+                <input type="submit" align="center" value="Войти"/>
             </div>
 
 

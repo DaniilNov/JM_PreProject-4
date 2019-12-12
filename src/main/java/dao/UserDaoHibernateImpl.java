@@ -14,11 +14,14 @@ import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
 
+   private Session session;
+
 
     @Override
-    public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
-        List<User> users = new ArrayList<>();
-        Session session = DBHelper.getSessionFactory().openSession();
+    public List<User> getAllUsers() {
+        List<User> users = null;
+
+        session = DBHelper.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
             users = session.createQuery("From User").list();
@@ -34,7 +37,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Session session = DBHelper.getSessionFactory().openSession();
+        session = DBHelper.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.save(user);
@@ -51,9 +54,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void deleteUser(long id) {
-        Session session = DBHelper.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+        session = DBHelper.getSessionFactory().openSession();
         User user = (User) session.get(User.class, id);
+        Transaction transaction = session.beginTransaction();
         try {
             session.delete(user);
             transaction.commit();
@@ -66,7 +69,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void editUser(User user) {
-        Session session = DBHelper.getSessionFactory().openSession();
+       session = DBHelper.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.update(user);
@@ -80,9 +83,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public User getUserById(long id) {
-        Session session = DBHelper.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+        session = DBHelper.getSessionFactory().openSession();
         User user = (User) session.get(User.class, id);
+        Transaction transaction = session.beginTransaction();
         try {
             transaction.commit();
         } catch (Exception e) {
@@ -95,10 +98,10 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public User getUserByName(String name) throws SQLException {
-        Session session = DBHelper.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+    public User getUserByName(String name) {
         User user = null;
+        session = DBHelper.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
         try {
             Query query = session.createQuery("FROM User WHERE name =:name");
             query.setParameter("name", name);

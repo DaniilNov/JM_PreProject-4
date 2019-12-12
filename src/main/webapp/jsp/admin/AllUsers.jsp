@@ -25,7 +25,7 @@
                 <td>${user.role}</td>
 
                 <td>
-                    <a href="/editUser?id=${user.id}">Edit</a>
+                    <a href="/admin/editUser?id=${user.id}">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/deleteUser?id=${user.id}">Delete</a>
                 </td>

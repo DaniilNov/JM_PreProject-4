@@ -5,7 +5,7 @@
 </head>
 <body>
 <div align="center">
-    <form action="/editUser" method="POST">
+    <form action="/admin/editUser" method="POST">
         <input type="hidden" name="id" value="${user.id}">
         <ul>
             <li>

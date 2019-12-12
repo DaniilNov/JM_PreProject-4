@@ -113,7 +113,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public User getUserByName(String name) throws SQLException {
+    public User getUserByName(String name) {
         try {
             PreparedStatement stmt = dbHelper.getConnection().prepareStatement(SQL_GET_USER_BY_NAME);
             stmt.setString(1, name);

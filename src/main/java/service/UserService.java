@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers() throws SQLException, ClassNotFoundException;
+    List getAllUsers() throws SQLException, ClassNotFoundException;
     void addUser(User user);
     void deleteUser(long id);
     void editUser(User user);

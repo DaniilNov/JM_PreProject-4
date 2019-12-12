@@ -17,16 +17,18 @@ import java.io.IOException;
 
 public class addUserServlet extends HttpServlet {
 
-    UserService userService = UserServiceImpl.getInstance();
+   private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/AddUserJSP.jsp");
+        resp.setCharacterEncoding("UTF-8");
         dispatcher.forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
@@ -37,10 +39,11 @@ public class addUserServlet extends HttpServlet {
         }
         User user = new User(name,password,role);
         userService.addUser(user);
-        HttpSession session = req.getSession();
-        session.setAttribute("user",user);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("html/ThankYou.html");
-        dispatcher.forward(req,resp);
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user",user);
+        resp.sendRedirect("/login");
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("html/ThankYou.html");
+//        dispatcher.forward(req,resp);
 
     }
 }
